@@ -6,6 +6,9 @@ import { Footer } from '@/components/layout/Footer'
 import { Button } from '@/components/ui/button'
 import { getToolById } from '@/lib/constants'
 import { TextCounter } from '@/components/features/text/TextCounter'
+import { CaseConverter } from '@/components/features/text/CaseConverter'
+import { Base64Encoder } from '@/components/features/text/Base64Encoder'
+import { JsonFormatter } from '@/components/features/text/JsonFormatter'
 
 interface ToolPageProps {
   params: Promise<{ category: string; id: string }>
@@ -14,7 +17,9 @@ interface ToolPageProps {
 // 実装済みツールのマッピング
 const toolComponents: Record<string, React.ComponentType> = {
   'text-counter': TextCounter,
-  // 他のツールを追加
+  'case-converter': CaseConverter,
+  'base64-encoder': Base64Encoder,
+  'json-formatter': JsonFormatter,
 }
 
 export default async function ToolPage({ params }: ToolPageProps) {
