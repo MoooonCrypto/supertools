@@ -9,6 +9,9 @@ import { TextCounter } from '@/components/features/text/TextCounter'
 import { CaseConverter } from '@/components/features/text/CaseConverter'
 import { Base64Encoder } from '@/components/features/text/Base64Encoder'
 import { JsonFormatter } from '@/components/features/text/JsonFormatter'
+import { UuidGenerator } from '@/components/features/dev/UuidGenerator'
+import { HashGenerator } from '@/components/features/dev/HashGenerator'
+import { ColorConverter } from '@/components/features/dev/ColorConverter'
 
 interface ToolPageProps {
   params: Promise<{ category: string; id: string }>
@@ -20,6 +23,9 @@ const toolComponents: Record<string, React.ComponentType> = {
   'case-converter': CaseConverter,
   'base64-encoder': Base64Encoder,
   'json-formatter': JsonFormatter,
+  'uuid-generator': UuidGenerator,
+  'hash-generator': HashGenerator,
+  'color-code-converter': ColorConverter,
 }
 
 export default async function ToolPage({ params }: ToolPageProps) {
