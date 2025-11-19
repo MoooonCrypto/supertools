@@ -1,0 +1,60 @@
+import type { ToolCategory } from '@/types'
+
+export const TOOL_CATEGORIES: ToolCategory[] = [
+  {
+    id: 'text',
+    name: 'Text Tools',
+    nameJa: 'テキストツール',
+    description: 'Text processing and conversion tools',
+    icon: 'FileText',
+    order: 1,
+  },
+  {
+    id: 'image',
+    name: 'Image Tools',
+    nameJa: '画像ツール',
+    description: 'Image editing and conversion tools',
+    icon: 'Image',
+    order: 2,
+  },
+  {
+    id: 'dev',
+    name: 'Developer Tools',
+    nameJa: '開発者ツール',
+    description: 'Tools for developers',
+    icon: 'Code',
+    order: 3,
+  },
+  {
+    id: 'calc',
+    name: 'Calculators',
+    nameJa: '計算・変換',
+    description: 'Various calculators and converters',
+    icon: 'Calculator',
+    order: 4,
+  },
+  {
+    id: 'pdf',
+    name: 'PDF Tools',
+    nameJa: 'PDFツール',
+    description: 'PDF manipulation tools',
+    icon: 'FileType',
+    order: 5,
+  },
+  {
+    id: 'seo',
+    name: 'SEO Tools',
+    nameJa: 'SEO・マーケティング',
+    description: 'SEO and marketing tools',
+    icon: 'TrendingUp',
+    order: 6,
+  },
+  {
+    id: 'utility',
+    name: 'Utilities',
+    nameJa: 'ユーティリティ',
+    description: 'Miscellaneous utility tools',
+    icon: 'Wrench',
+    order: 7,
+  },
+]
