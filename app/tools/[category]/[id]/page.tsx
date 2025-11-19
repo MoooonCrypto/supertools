@@ -12,6 +12,8 @@ import { JsonFormatter } from '@/components/features/text/JsonFormatter'
 import { UuidGenerator } from '@/components/features/dev/UuidGenerator'
 import { HashGenerator } from '@/components/features/dev/HashGenerator'
 import { ColorConverter } from '@/components/features/dev/ColorConverter'
+import { Stopwatch } from '@/components/features/utility/Stopwatch'
+import { Timer } from '@/components/features/utility/Timer'
 
 interface ToolPageProps {
   params: Promise<{ category: string; id: string }>
@@ -26,6 +28,8 @@ const toolComponents: Record<string, React.ComponentType> = {
   'uuid-generator': UuidGenerator,
   'hash-generator': HashGenerator,
   'color-code-converter': ColorConverter,
+  'stopwatch': Stopwatch,
+  'timer': Timer,
 }
 
 export default async function ToolPage({ params }: ToolPageProps) {
