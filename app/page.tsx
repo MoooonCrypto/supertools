@@ -1,7 +1,17 @@
 import Link from 'next/link'
-import { ArrowRight, FileText, Image, Code, Calculator, FileType, TrendingUp, Wrench } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import {
+  ArrowRight,
+  FileText,
+  Image,
+  Code,
+  Calculator,
+  FileType,
+  TrendingUp,
+  Wrench,
+  Rocket,
+  Lock,
+  Zap,
+} from 'lucide-react'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { TOOL_CATEGORIES, getHighPriorityTools } from '@/lib/constants'
@@ -16,84 +26,89 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Wrench,
 }
 
+const FeatureCard = ({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) => (
+  <div className="relative overflow-hidden rounded-lg border border-border bg-card/50 p-6 shadow-lg backdrop-blur-sm transition-all hover:border-primary/50 hover:shadow-primary/20">
+    <div className="absolute -top-4 -right-4 h-16 w-16 rounded-full bg-primary/20 blur-2xl"></div>
+    <div className="relative z-10">
+      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">{icon}</div>
+      <h3 className="mb-2 font-bold text-xl text-foreground">{title}</h3>
+      <p className="text-sm text-foreground/80">{children}</p>
+    </div>
+  </div>
+)
+
 export default function HomePage() {
   const highPriorityTools = getHighPriorityTools().slice(0, 8)
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-background">
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="container mx-auto px-4 py-16 text-center">
-          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
-            100式道具箱
-          </h1>
-          <p className="mx-auto mt-4 max-w-[700px] text-lg text-muted-foreground sm:text-xl">
-            100以上の便利なツールを無料で提供。テキスト処理、画像編集、開発者ツール、計算機など、日常業務から開発まで幅広くサポート。
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button size="lg" asChild>
-              <Link href="#categories">
-                ツールを探す
-                <ArrowRight className="ml-2 h-4 w-4" />
+        <section className="relative overflow-hidden py-24 sm:py-32">
+          <div className="absolute inset-0 bg-gradient-to-br from-background via-muted/50 to-background opacity-50"></div>
+          <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-5"></div>
+          <div className="container relative mx-auto px-4 text-center">
+            <h1 className="font-display text-5xl font-black uppercase tracking-wider text-primary sm:text-7xl md:text-8xl">
+              100<span className="text-foreground">式</span>道具箱
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl text-lg text-foreground/80 sm:text-xl">
+              100以上の便利なツールを無料で提供。テキスト処理、画像編集、開発者ツールなど、日常業務から開発まで幅広くサポート。
+            </p>
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
+              <Link href="#categories" className="group relative inline-block">
+                <span className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary to-secondary opacity-75 transition-all group-hover:opacity-100"></span>
+                <span className="relative flex items-center justify-center rounded-lg bg-muted px-6 py-3 font-bold text-foreground transition-all group-hover:bg-opacity-90">
+                  ツールを探す <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </span>
               </Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
-              <Link href="/about">サービスについて</Link>
-            </Button>
+            </div>
           </div>
         </section>
 
         {/* Stats Section */}
-        <section className="border-y border-border bg-muted/50 py-12">
+        <section className="border-y border-border/50 bg-muted/30 py-12">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-              <div className="text-center">
-                <div className="text-4xl font-bold text-primary">94+</div>
-                <div className="mt-2 text-sm text-muted-foreground">ツール数</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-primary">7</div>
-                <div className="mt-2 text-sm text-muted-foreground">カテゴリ</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-primary">100%</div>
-                <div className="mt-2 text-sm text-muted-foreground">無料</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-primary">0</div>
-                <div className="mt-2 text-sm text-muted-foreground">登録不要</div>
-              </div>
+              {[
+                { value: '94+', label: 'ツール数' },
+                { value: '7', label: 'カテゴリ' },
+                { value: '100%', label: '無料' },
+                { value: '0', label: '登録不要' },
+              ].map((stat) => (
+                <div key={stat.label} className="text-center">
+                  <div className="font-display text-5xl font-bold text-primary">{stat.value}</div>
+                  <div className="mt-2 text-sm uppercase tracking-widest text-foreground/60">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
         {/* Categories Section */}
-        <section id="categories" className="container mx-auto px-4 py-16">
-          <div className="mb-8 text-center">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">カテゴリから探す</h2>
-            <p className="mt-2 text-muted-foreground">用途に応じてカテゴリからツールを選択できます</p>
+        <section id="categories" className="container mx-auto px-4 py-20">
+          <div className="mb-12 text-center">
+            <h2 className="font-display text-4xl font-bold uppercase tracking-wider text-foreground sm:text-5xl">
+              カテゴリから探す
+            </h2>
+            <p className="mt-4 text-foreground/80">用途に応じてカテゴリからツールを選択できます</p>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {TOOL_CATEGORIES.map((category) => {
               const Icon = iconMap[category.icon]
               return (
-                <Link key={category.id} href={`/tools/${category.id}`}>
-                  <Card className="transition-all hover:shadow-lg hover:border-primary/50 h-full">
-                    <CardHeader>
-                      <div className="flex items-center space-x-4">
-                        {Icon && (
-                          <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                            <Icon className="h-6 w-6 text-primary" />
-                          </div>
-                        )}
-                        <div className="flex-1">
-                          <CardTitle className="text-lg">{category.nameJa}</CardTitle>
-                          <CardDescription className="mt-1 text-xs">{category.name}</CardDescription>
-                        </div>
-                      </div>
-                    </CardHeader>
-                  </Card>
+                <Link
+                  key={category.id}
+                  href={`/tools/${category.id}`}
+                  className="group block rounded-lg border-2 border-border/50 bg-card p-6 transition-all hover:-translate-y-1 hover:border-primary hover:shadow-2xl hover:shadow-primary/20"
+                >
+                  <div className="flex items-center space-x-4">
+                    {Icon && <Icon className="h-8 w-8 text-secondary" />}
+                    <div>
+                      <h3 className="font-bold text-lg text-foreground">{category.nameJa}</h3>
+                      <p className="text-sm text-foreground/60">{category.name}</p>
+                    </div>
+                  </div>
                 </Link>
               )
             })}
@@ -101,65 +116,46 @@ export default function HomePage() {
         </section>
 
         {/* Popular Tools Section */}
-        <section className="bg-muted/50 py-16">
+        <section className="bg-muted/30 py-20">
           <div className="container mx-auto px-4">
-            <div className="mb-8 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">人気のツール</h2>
-              <p className="mt-2 text-muted-foreground">よく使われているツールをピックアップ</p>
+            <div className="mb-12 text-center">
+              <h2 className="font-display text-4xl font-bold uppercase tracking-wider text-foreground sm:text-5xl">
+                人気のツール
+              </h2>
+              <p className="mt-4 text-foreground/80">よく使われているツールをピックアップ</p>
             </div>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {highPriorityTools.map((tool) => (
-                <Link key={tool.id} href={`/tools/${tool.category}/${tool.id}`}>
-                  <Card className="transition-all hover:shadow-lg hover:border-primary/50 h-full">
-                    <CardHeader>
-                      <CardTitle className="text-base">{tool.nameJa}</CardTitle>
-                      <CardDescription className="text-xs">{tool.name}</CardDescription>
-                    </CardHeader>
-                  </Card>
+                <Link
+                  key={tool.id}
+                  href={`/tools/${tool.category}/${tool.id}`}
+                  className="block rounded-md border border-border/50 bg-card p-4 transition-all hover:bg-muted"
+                >
+                  <h3 className="font-bold text-base text-foreground">{tool.nameJa}</h3>
+                  <p className="text-xs text-foreground/60">{tool.name}</p>
                 </Link>
               ))}
-            </div>
-            <div className="mt-8 text-center">
-              <Button variant="outline" asChild>
-                <Link href="/tools/text">すべてのツールを見る</Link>
-              </Button>
             </div>
           </div>
         </section>
 
         {/* Features Section */}
-        <section className="container mx-auto px-4 py-16">
-          <div className="mb-8 text-center">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">特徴</h2>
+        <section className="container mx-auto px-4 py-20">
+          <div className="mb-12 text-center">
+            <h2 className="font-display text-4xl font-bold uppercase tracking-wider text-foreground sm:text-5xl">
+              特徴
+            </h2>
           </div>
           <div className="grid gap-8 md:grid-cols-3">
-            <div className="text-center">
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                <span className="text-2xl">🚀</span>
-              </div>
-              <h3 className="mt-4 text-xl font-semibold">高速・軽量</h3>
-              <p className="mt-2 text-sm text-muted-foreground">
-                すべてブラウザ内で処理。サーバーアップロード不要で高速動作。
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                <span className="text-2xl">🔒</span>
-              </div>
-              <h3 className="mt-4 text-xl font-semibold">プライバシー重視</h3>
-              <p className="mt-2 text-sm text-muted-foreground">
-                ファイルはブラウザのメモリ内のみで処理。サーバーに送信されません。
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                <span className="text-2xl">🆓</span>
-              </div>
-              <h3 className="mt-4 text-xl font-semibold">完全無料</h3>
-              <p className="mt-2 text-sm text-muted-foreground">
-                すべてのツールを無料で使用可能。登録も不要です。
-              </p>
-            </div>
+            <FeatureCard icon={<Zap />} title="高速・軽量">
+              すべてブラウザ内で処理。サーバーアップロード不要で高速動作。
+            </FeatureCard>
+            <FeatureCard icon={<Lock />} title="プライバシー重視">
+              ファイルはブラウザのメモリ内のみで処理。サーバーに送信されません。
+            </FeatureCard>
+            <FeatureCard icon={<Rocket />} title="完全無料">
+              すべてのツールを無料で使用可能。登録も不要です。
+            </FeatureCard>
           </div>
         </section>
       </main>

@@ -1,18 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --primary: #3b82f6;
-  --secondary: #8b5cf6;
-  --accent: #10b981;
-  --muted: #f3f4f6;
-  --border: #e5e7eb;
-  --card: #ffffff;
-  --radius: 0.5rem;
+  --font-mono: 'Menlo', 'Consolas', 'Monaco', 'Liberation Mono', 'Lucida Console', monospace;
+
+  /* Tokyo Night theme inspired colors */
+  --background: #1a1b26;
+  --foreground: #c0caf5;
+  --primary: #bb9af7;
+  --secondary: #7aa2f7;
+  --accent: #f7768e;
+  --muted: #24283b;
+  --border: #414868;
+  --card: #1f2335;
+  --radius: 0.75rem;
 }
 
 @theme inline {
+  --font-family-mono: var(--font-mono);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
@@ -24,27 +28,22 @@
   --radius: var(--radius);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --primary: #60a5fa;
-    --secondary: #a78bfa;
-    --accent: #34d399;
-    --muted: #1f2937;
-    --border: #374151;
-    --card: #111827;
-  }
-}
-
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(to right, var(--border) 1px, transparent 1px);
+  background-size: 2rem 2rem;
+  background-position: center center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-exo2), sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.05em;
 }
 
 * {
