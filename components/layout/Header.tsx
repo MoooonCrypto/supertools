@@ -2,89 +2,74 @@
 
 import Link from 'next/link'
 import { Search, Heart, Clock, Menu } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { useState } from 'react'
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-16 items-center px-4">
+    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-sm">
+      <div className="container mx-auto flex h-20 items-center justify-between px-4">
         {/* Logo */}
-        <Link href="/" className="mr-6 flex items-center space-x-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-white font-bold">
-            100
-          </div>
-          <span className="hidden font-bold sm:inline-block">100式道具箱</span>
+        <Link href="/" className="flex items-center space-x-2">
+          <span className="font-display text-2xl font-black uppercase tracking-wider text-primary">
+            100<span className="text-foreground">式</span>
+          </span>
         </Link>
 
-        {/* Search Bar - Desktop */}
-        <div className="hidden md:flex flex-1 items-center space-x-2 max-w-xl">
-          <div className="relative flex-1">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex flex-1 items-center justify-center">
+          <div className="relative w-full max-w-md">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-foreground/50" />
+            <input
               type="search"
               placeholder="ツールを検索..."
-              className="pl-9 w-full"
+              className="w-full rounded-full border border-border/50 bg-muted/50 py-2 pl-12 pr-4 text-foreground placeholder:text-foreground/50 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50"
             />
           </div>
         </div>
 
-        {/* Right Side Navigation */}
-        <nav className="flex items-center ml-auto space-x-2">
-          <Button variant="ghost" size="icon" asChild className="hidden sm:flex">
-            <Link href="/favorites">
-              <Heart className="h-5 w-5" />
-              <span className="sr-only">お気に入り</span>
-            </Link>
-          </Button>
-          <Button variant="ghost" size="icon" asChild className="hidden sm:flex">
-            <Link href="/recent">
-              <Clock className="h-5 w-5" />
-              <span className="sr-only">最近使用</span>
-            </Link>
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
+        {/* Right Side Icons & Mobile Menu Button */}
+        <nav className="flex items-center space-x-2">
+          <Link href="/favorites" className="hidden rounded-full p-2 text-foreground/80 transition-colors hover:bg-muted hover:text-foreground sm:block">
+            <Heart className="h-6 w-6" />
+            <span className="sr-only">お気に入り</span>
+          </Link>
+          <Link href="/recent" className="hidden rounded-full p-2 text-foreground/80 transition-colors hover:bg-muted hover:text-foreground sm:block">
+            <Clock className="h-6 w-6" />
+            <span className="sr-only">最近使用</span>
+          </Link>
+          <button
+            className="rounded-full p-2 text-foreground/80 transition-colors hover:bg-muted hover:text-foreground md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            <Menu className="h-5 w-5" />
-            <span className="sr-only">メニュー</span>
-          </Button>
+            <Menu className="h-6 w-6" />
+            <span className="sr-only">メニューを開く</span>
+          </button>
         </nav>
       </div>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="border-t border-border bg-background md:hidden">
-          <div className="container mx-auto p-4 space-y-4">
-            {/* Mobile Search */}
-            <div className="relative">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input
+        <div className="border-t border-border/50 bg-background md:hidden">
+          <div className="container mx-auto p-4">
+            <div className="relative mb-4">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-foreground/50" />
+              <input
                 type="search"
                 placeholder="ツールを検索..."
-                className="pl-9 w-full"
+                className="w-full rounded-full border border-border/50 bg-muted/50 py-2 pl-12 pr-4 text-foreground placeholder:text-foreground/50 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/50"
               />
             </div>
-            {/* Mobile Links */}
             <nav className="flex flex-col space-y-2">
-              <Button variant="ghost" asChild className="justify-start">
-                <Link href="/favorites">
-                  <Heart className="mr-2 h-4 w-4" />
-                  お気に入り
-                </Link>
-              </Button>
-              <Button variant="ghost" asChild className="justify-start">
-                <Link href="/recent">
-                  <Clock className="mr-2 h-4 w-4" />
-                  最近使用
-                </Link>
-              </Button>
+              <Link href="/favorites" className="flex items-center rounded-md p-2 text-foreground/80 hover:bg-muted hover:text-foreground">
+                <Heart className="mr-3 h-5 w-5" />
+                お気に入り
+              </Link>
+              <Link href="/recent" className="flex items-center rounded-md p-2 text-foreground/80 hover:bg-muted hover:text-foreground">
+                <Clock className="mr-3 h-5 w-5" />
+                最近使用
+              </Link>
             </nav>
           </div>
         </div>
