@@ -9,9 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-zen-kaku)', 'sans-serif'],
-        heading: ['var(--font-exo2)', 'var(--font-zen-kaku)', 'sans-serif'],
-        display: ['var(--font-exo2)', 'var(--font-zen-kaku)', 'sans-serif'],
+        sans: ['var(--font-zen-kaku)', 'var(--font-exo2)', 'sans-serif'],
+        heading: ['var(--font-zen-kaku)', 'var(--font-exo2)', 'sans-serif'],
+        display: ['var(--font-zen-kaku)', 'var(--font-exo2)', 'sans-serif'],
       },
     },
   },
